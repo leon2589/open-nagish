@@ -1,0 +1,48 @@
+{
+  "name": "accessibionid",
+  "version": "1.0.0",
+  "description": "Comprehensive open-source web accessibility overlay widget for Israeli SI 5568 and WCAG 2.1 AA compliance",
+  "main": "dist/accessibionid.min.js",
+  "module": "dist/accessibionid.esm.js",
+  "types": "dist/accessibionid.d.ts",
+  "files": [
+    "dist/",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js --dev",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src/"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "wcag",
+    "wcag2.1",
+    "si5568",
+    "israel",
+    "widget",
+    "overlay",
+    "ada",
+    "section508",
+    "screen-reader",
+    "disability",
+    "inclusive"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "homepage": "",
+  "bugs": {
+    "url": ""
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.3"
+  }
+}
