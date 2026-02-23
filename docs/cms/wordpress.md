@@ -40,7 +40,7 @@ function enqueue_open_nagish() {
         'open-nagish',
         get_template_directory_uri() . '/js/open-nagish.min.js',
         array(),
-        '1.0.0',
+        '1.0.1',
         true
     );
 }

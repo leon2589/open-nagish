@@ -24,7 +24,7 @@ async function build() {
     globalName: 'OpenNagish',
     minify: !isDev,
     banner: {
-      js: `/*! OpenNagish v1.0.0 | MIT License | by Leonid Shoresh | https://github.com/open-nagish */`,
+      js: `/*! OpenNagish v1.0.1 | MIT License | by Leonid Shoresh | https://github.com/leon2589/open-nagish */`,
     },
   });
 

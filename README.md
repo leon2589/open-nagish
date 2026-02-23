@@ -8,10 +8,16 @@ Created by **Leonid Shoresh**.
 
 ## Quick Start
 
-Add one line to your HTML:
+Add one line to your HTML — the widget auto-initializes, no extra JavaScript needed:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/open-nagish@latest/dist/open-nagish.min.js" defer></script>
+```
+
+Or pin a specific version:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/open-nagish@1.0.1/dist/open-nagish.min.js" defer></script>
 ```
 
 Or self-host:
@@ -89,7 +95,7 @@ init({ lang: 'he', position: 'bottom-left' });
     },
   };
 </script>
-<script src="open-nagish.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/open-nagish@latest/dist/open-nagish.min.js" defer></script>
 ```
 
 ## Languages
@@ -135,6 +141,15 @@ The widget also addresses WCAG 2.1 success criteria including:
 - 2.3.3 Animation from Interactions
 - 4.1.3 Status Messages
 
+## CMS Integration Guides
+
+Step-by-step setup instructions for popular platforms:
+
+- [WordPress](docs/cms/wordpress.md) — via `functions.php`, plugin, or self-hosted
+- [Shopify](docs/cms/shopify.md) — via `theme.liquid` code injection
+- [Wix](docs/cms/wix.md) — via Custom Code settings
+- [Squarespace](docs/cms/squarespace.md) — via Code Injection (Business plan+)
+
 ## Development
 
 ```bash
@@ -160,7 +175,7 @@ src/
   utils.js                 Shared utilities
   modules/                 One file per feature (23 modules)
 dist/
-  open-nagish.min.js       Minified IIFE bundle (~75 KB)
+  open-nagish.min.js       Minified IIFE bundle (~77 KB)
   open-nagish.esm.js       ES module for bundlers
 demo.html                  Demo page
 ```
@@ -196,4 +211,4 @@ MIT License. See [LICENSE](LICENSE).
 
 - [WCAG 2.1 Specification](https://www.w3.org/TR/WCAG21/)
 - [SI 5568 Standard](https://www.sii.org.il/he/public-standards)
-- [Israeli Accessibility Regulations](https://www.gov.il/he/departments/policies/accessibility-regulations)
+- [Israeli Accessibility Regulations (W3C overview)](https://www.w3.org/WAI/policies/israel/)
