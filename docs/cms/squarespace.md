@@ -7,13 +7,13 @@
 
 ```html
 <script>
-  window.AccessibioNidConfig = {
+  window.OpenNagishConfig = {
     position: 'bottom-left',
     lang: 'he',
     statementUrl: '/accessibility-statement'
   };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/accessibionid@latest/dist/accessibionid.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/open-nagish@latest/dist/open-nagish.min.js" defer></script>
 ```
 
 3. Click **Save**

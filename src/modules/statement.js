@@ -33,12 +33,12 @@ export class StatementModule {
     `;
 
     const accommodations = data.accommodations || [
-      getLanguage() === 'he' ? 'התאמת ניגודיות וצבעים' : 'Contrast and color adjustments',
-      getLanguage() === 'he' ? 'שינוי גודל גופן' : 'Font size adjustment',
-      getLanguage() === 'he' ? 'ניווט באמצעות מקלדת' : 'Keyboard navigation',
-      getLanguage() === 'he' ? 'תאימות לקוראי מסך' : 'Screen reader compatibility',
-      getLanguage() === 'he' ? 'הדגשת קישורים' : 'Link highlighting',
-      getLanguage() === 'he' ? 'עצירת אנימציות' : 'Animation control',
+      t('contrastAndColors'),
+      t('fontSizeAdjustment'),
+      t('keyboardNavigation'),
+      t('screenReaderCompat'),
+      t('linkHighlighting'),
+      t('animationControl'),
     ];
 
     const accList = accommodations.map(a => `<li>${a}</li>`).join('');
@@ -55,7 +55,7 @@ export class StatementModule {
       ${data.lastAuditDate ? `<p><strong>${t('statementLastAudit')}:</strong> ${data.lastAuditDate}</p>` : ''}
       <p><strong>${t('statementAccommodations')}:</strong></p>
       <ul style="padding-inline-start:20px;margin-bottom:16px;">${accList}</ul>
-      <p style="font-size:12px;color:#888;">Powered by AccessibioNid | SI 5568 + WCAG 2.1 AA</p>
+      <p style="font-size:12px;color:#888;">${t('poweredBy')} OpenNagish | SI 5568 + WCAG 2.1 AA</p>
     `;
 
     document.body.appendChild(this.backdrop);

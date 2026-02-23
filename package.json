@@ -1,10 +1,10 @@
 {
-  "name": "accessibionid",
+  "name": "open-nagish",
   "version": "1.0.0",
   "description": "Comprehensive open-source web accessibility overlay widget for Israeli SI 5568 and WCAG 2.1 AA compliance",
-  "main": "dist/accessibionid.min.js",
-  "module": "dist/accessibionid.esm.js",
-  "types": "dist/accessibionid.d.ts",
+  "main": "dist/open-nagish.min.js",
+  "module": "dist/open-nagish.esm.js",
+  "types": "dist/open-nagish.d.ts",
   "files": [
     "dist/",
     "LICENSE",
@@ -24,6 +24,7 @@
     "wcag2.1",
     "si5568",
     "israel",
+    "nagish",
     "widget",
     "overlay",
     "ada",
@@ -32,15 +33,15 @@
     "disability",
     "inclusive"
   ],
-  "author": "",
+  "author": "Leonid Shoresh",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+ssh://git@github.com/leon2589/open-nagish.git"
   },
-  "homepage": "",
+  "homepage": "https://github.com/leon2589/open-nagish#readme",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/leon2589/open-nagish/issues"
   },
   "devDependencies": {
     "esbuild": "^0.27.3"

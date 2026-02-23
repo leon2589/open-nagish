@@ -1,11 +1,11 @@
-# Contributing to AccessibioNid
+# Contributing to OpenNagish
 
 Thank you for your interest in making the web more accessible! Here's how to contribute.
 
 ## Getting Started
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/accessibionid.git`
+2. Clone your fork: `git clone https://github.com/leon2589/open-nagish.git`
 3. Install dependencies: `npm install`
 4. Start the dev server: `npm run dev`
 5. Open `http://localhost:3000/demo.html`
@@ -33,9 +33,9 @@ Thank you for your interest in making the web more accessible! Here's how to con
 
 1. Create `src/modules/your-feature.js`
 2. Export a class with `enable()`, `disable()`, `toggle()` methods
-3. Import and register it in `src/accessibionid.js`
+3. Import and register it in `src/open-nagish.js`
 4. Add translations to `src/i18n.js`
-5. Add the feature to the panel UI in `accessibionid.js`
+5. Add the feature to the panel UI in `open-nagish.js`
 6. Update `README.md`
 
 ## Accessibility Requirements

@@ -29,7 +29,7 @@ import { BadgeModule } from './modules/badge.js';
 
 const ICON_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm9 7h-6l-1.41-1.41A2 2 0 0 0 12.17 7H12a2 2 0 0 0-1.42.59L9 9H3a1 1 0 0 0 0 2h5l1 1v3l-2 5a1 1 0 0 0 1.8.8L11 16h2l2.2 4.8a1 1 0 0 0 1.8-.8l-2-5v-3l1-1h5a1 1 0 0 0 0-2z"/></svg>`;
 
-class AccessibioNidWidget {
+class OpenNagishWidget {
   constructor() {
     this.isOpen = false;
     this.modules = {};
@@ -37,7 +37,7 @@ class AccessibioNidWidget {
     this.shadowRoot = null;
     this.panel = null;
     this.trigger = null;
-    this.config = window.AccessibioNidConfig || {};
+    this.config = window.OpenNagishConfig || {};
   }
 
   init() {
@@ -45,7 +45,7 @@ class AccessibioNidWidget {
     setLanguage(savedLang);
 
     this.shadowHost = document.createElement('div');
-    this.shadowHost.id = 'accessibionid-widget';
+    this.shadowHost.id = 'opennagish-widget';
     this.shadowHost.style.cssText = 'all:initial;position:fixed;z-index:2147483647;';
     document.body.appendChild(this.shadowHost);
     this.shadowRoot = this.shadowHost.attachShadow({ mode: 'open' });
@@ -80,7 +80,6 @@ class AccessibioNidWidget {
     });
 
     this.positionElement(this.trigger, pos);
-    this.trigger.addEventListener('click', () => this.toggle());
     this.makeDraggable(this.trigger);
     this.shadowRoot.appendChild(this.trigger);
   }
@@ -585,21 +584,20 @@ class AccessibioNidWidget {
     el.addEventListener('mousedown', onStart);
     el.addEventListener('touchstart', onStart, { passive: true });
 
-    const origClick = el.onclick;
-    el.onclick = (e) => {
-      if (!isDragging && origClick) origClick.call(el, e);
-      else if (!isDragging) this.toggle();
-    };
-    el.removeEventListener('click', el.onclick);
     el.addEventListener('click', (e) => {
-      if (isDragging) { isDragging = false; e.preventDefault(); }
-    }, true);
+      if (isDragging) {
+        isDragging = false;
+        e.stopPropagation();
+        return;
+      }
+      this.toggle();
+    });
   }
 }
 
 export function init(config) {
-  if (config) window.AccessibioNidConfig = { ...window.AccessibioNidConfig, ...config };
-  const widget = new AccessibioNidWidget();
+  if (config) window.OpenNagishConfig = { ...window.OpenNagishConfig, ...config };
+  const widget = new OpenNagishWidget();
   widget.init();
   return widget;
 }

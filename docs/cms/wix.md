@@ -9,12 +9,12 @@
 
 ```html
 <script>
-  window.AccessibioNidConfig = {
+  window.OpenNagishConfig = {
     position: 'bottom-left',
     lang: 'he'
   };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/accessibionid@latest/dist/accessibionid.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/open-nagish@latest/dist/open-nagish.min.js" defer></script>
 ```
 
 5. Set placement to **Body - end**
@@ -23,5 +23,5 @@
 
 ## Notes
 
-- Wix has its own built-in accessibility features. AccessibioNid supplements these.
+- Wix has its own built-in accessibility features. OpenNagish supplements these.
 - The widget's Shadow DOM ensures no style conflicts with Wix's design system.

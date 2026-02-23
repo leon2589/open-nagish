@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'accessibionid_prefs';
+const STORAGE_KEY = 'opennagish_prefs';
 
 let cache = null;
 
