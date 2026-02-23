@@ -79,7 +79,7 @@ export class ScreenReaderModule {
 
       if (['script', 'style', 'noscript', 'template'].includes(tag)) return;
       if (el.hidden || el.getAttribute('aria-hidden') === 'true') return;
-      if (el.id === 'accessibionid-widget') return;
+      if (el.id === 'opennagish-widget') return;
 
       if (/^h[1-6]$/.test(tag)) {
         lines.push(`\n[${'#'.repeat(parseInt(tag[1]))} Heading ${tag[1]}] ${el.textContent.trim()}`);

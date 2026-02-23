@@ -5,7 +5,7 @@ const path = require('path');
 const isDev = process.argv.includes('--dev');
 
 const commonOptions = {
-  entryPoints: ['src/accessibionid.js'],
+  entryPoints: ['src/open-nagish.js'],
   bundle: true,
   sourcemap: isDev,
   target: ['es2018'],
@@ -19,32 +19,32 @@ async function build() {
 
   await esbuild.build({
     ...commonOptions,
-    outfile: 'dist/accessibionid.min.js',
+    outfile: 'dist/open-nagish.min.js',
     format: 'iife',
-    globalName: 'AccessibioNid',
+    globalName: 'OpenNagish',
     minify: !isDev,
     banner: {
-      js: `/*! AccessibioNid v1.0.0 | MIT License | https://github.com/accessibionid */`,
+      js: `/*! OpenNagish v1.0.0 | MIT License | by Leonid Shoresh | https://github.com/open-nagish */`,
     },
   });
 
   await esbuild.build({
     ...commonOptions,
-    outfile: 'dist/accessibionid.esm.js',
+    outfile: 'dist/open-nagish.esm.js',
     format: 'esm',
     minify: !isDev,
   });
 
-  const stat = fs.statSync('dist/accessibionid.min.js');
-  console.log(`Built dist/accessibionid.min.js (${(stat.size / 1024).toFixed(1)} KB)`);
-  console.log('Built dist/accessibionid.esm.js');
+  const stat = fs.statSync('dist/open-nagish.min.js');
+  console.log(`Built dist/open-nagish.min.js (${(stat.size / 1024).toFixed(1)} KB)`);
+  console.log('Built dist/open-nagish.esm.js');
 
   if (isDev) {
     const ctx = await esbuild.context({
       ...commonOptions,
-      outfile: 'dist/accessibionid.min.js',
+      outfile: 'dist/open-nagish.min.js',
       format: 'iife',
-      globalName: 'AccessibioNid',
+      globalName: 'OpenNagish',
     });
     await ctx.serve({
       servedir: '.',

@@ -1,31 +1,33 @@
-# AccessibioNid
+# OpenNagish
 
 The most comprehensive open-source web accessibility overlay widget. One script tag gives any website a floating accessibility toolbar with **20+ assistive features** covering visual, motor, cognitive, and auditory disabilities.
 
 Built for compliance with **Israeli Standard SI 5568** (WCAG 2.0 AA + national modifications), **Israeli Accessibility Regulations 2017**, and **[WCAG 2.1](https://www.w3.org/TR/WCAG21/)**.
+
+Created by **Leonid Shoresh**.
 
 ## Quick Start
 
 Add one line to your HTML:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/accessibionid@latest/dist/accessibionid.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/open-nagish@latest/dist/open-nagish.min.js" defer></script>
 ```
 
 Or self-host:
 
 ```html
-<script src="/path/to/accessibionid.min.js" defer></script>
+<script src="/path/to/open-nagish.min.js" defer></script>
 ```
 
 Or install via npm:
 
 ```bash
-npm install accessibionid
+npm install open-nagish
 ```
 
 ```javascript
-import { init } from 'accessibionid';
+import { init } from 'open-nagish';
 init({ lang: 'he', position: 'bottom-left' });
 ```
 
@@ -74,7 +76,7 @@ init({ lang: 'he', position: 'bottom-left' });
 
 ```html
 <script>
-  window.AccessibioNidConfig = {
+  window.OpenNagishConfig = {
     position: 'bottom-left',    // 'bottom-left', 'bottom-right', 'top-left', 'top-right'
     lang: 'he',                 // 'he', 'en', 'ar', 'ru'
     statementUrl: '/accessibility-statement',  // link to existing statement
@@ -87,7 +89,7 @@ init({ lang: 'he', position: 'bottom-left' });
     },
   };
 </script>
-<script src="accessibionid.min.js" defer></script>
+<script src="open-nagish.min.js" defer></script>
 ```
 
 ## Languages
@@ -151,16 +153,16 @@ npm run dev
 
 ```
 src/
-  accessibionid.js       Main entry point
-  styles.js              All CSS (injected into Shadow DOM)
-  i18n.js                Translations (HE/EN/AR/RU)
-  storage.js             localStorage persistence
-  utils.js               Shared utilities
-  modules/               One file per feature (23 modules)
+  open-nagish.js           Main entry point
+  styles.js                All CSS (injected into Shadow DOM)
+  i18n.js                  Translations (HE/EN/AR/RU)
+  storage.js               localStorage persistence
+  utils.js                 Shared utilities
+  modules/                 One file per feature (23 modules)
 dist/
-  accessibionid.min.js   Minified IIFE bundle (~72 KB)
-  accessibionid.esm.js   ES module for bundlers
-demo.html                Demo page
+  open-nagish.min.js       Minified IIFE bundle (~75 KB)
+  open-nagish.esm.js       ES module for bundlers
+demo.html                  Demo page
 ```
 
 ### Architecture
@@ -181,6 +183,10 @@ demo.html                Demo page
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## Author
+
+**Leonid Shoresh** - Creator and maintainer
 
 ## License
 
