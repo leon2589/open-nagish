@@ -1,13 +1,12 @@
-const GUIDE_ID = 'anid-reading-guide';
-
 export class ReadingGuideModule {
   constructor(ctx) { this.ctx = ctx; this.active = false; this.guide = null; this._onMove = null; }
 
   enable() {
+    if (this.active) return;
     this.active = true;
     if (!this.guide) {
       this.guide = document.createElement('div');
-      this.guide.id = GUIDE_ID;
+      this.guide.id = 'anid-reading-guide';
       this.guide.style.cssText = `
         position: fixed;
         left: 0;
@@ -31,8 +30,14 @@ export class ReadingGuideModule {
 
   disable() {
     this.active = false;
-    if (this.guide) this.guide.style.display = 'none';
-    if (this._onMove) document.removeEventListener('mousemove', this._onMove);
+    if (this._onMove) {
+      document.removeEventListener('mousemove', this._onMove);
+      this._onMove = null;
+    }
+    if (this.guide) {
+      this.guide.remove();
+      this.guide = null;
+    }
   }
 
   toggle() { this.active ? this.disable() : this.enable(); }

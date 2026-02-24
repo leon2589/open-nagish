@@ -1,5 +1,3 @@
-const MASK_ID = 'anid-line-mask';
-
 export class LineMaskModule {
   constructor(ctx) {
     this.ctx = ctx;
@@ -10,6 +8,7 @@ export class LineMaskModule {
   }
 
   enable() {
+    if (this.active) return;
     this.active = true;
     if (!this.maskTop) {
       this.maskTop = this._createOverlay('top');
@@ -32,7 +31,7 @@ export class LineMaskModule {
 
   _createOverlay(position) {
     const el = document.createElement('div');
-    el.className = `${MASK_ID}-${position}`;
+    el.className = `anid-line-mask-${position}`;
     el.style.cssText = `
       position: fixed;
       left: 0;
@@ -54,9 +53,12 @@ export class LineMaskModule {
 
   disable() {
     this.active = false;
-    if (this.maskTop) this.maskTop.style.display = 'none';
-    if (this.maskBottom) this.maskBottom.style.display = 'none';
-    if (this._onMove) document.removeEventListener('mousemove', this._onMove);
+    if (this._onMove) {
+      document.removeEventListener('mousemove', this._onMove);
+      this._onMove = null;
+    }
+    if (this.maskTop) { this.maskTop.remove(); this.maskTop = null; }
+    if (this.maskBottom) { this.maskBottom.remove(); this.maskBottom = null; }
   }
 
   toggle() { this.active ? this.disable() : this.enable(); }

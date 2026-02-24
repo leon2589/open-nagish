@@ -76,6 +76,14 @@ const translations = {
     screenReaderCompat: 'תאימות לקוראי מסך',
     linkHighlighting: 'הדגשת קישורים',
     animationControl: 'עצירת אנימציות',
+    noAltText: '(ללא טקסט חלופי)',
+    ttsHover: 'הקראה בריחוף',
+    ttsSelection: 'הקראת טקסט מסומן',
+    ttsReadPage: 'הקראת הדף',
+    ttsStop: 'עצור הקראה',
+    ttsReading: 'מקריא...',
+    shortcutPanelToggle: 'פתח/סגור תפריט נגישות',
+    keyboardShortcuts: 'קיצורי מקלדת',
   },
   en: {
     dir: 'ltr',
@@ -154,6 +162,14 @@ const translations = {
     screenReaderCompat: 'Screen reader compatibility',
     linkHighlighting: 'Link highlighting',
     animationControl: 'Animation control',
+    noAltText: '(no alt text)',
+    ttsHover: 'Read on Hover',
+    ttsSelection: 'Read Selection',
+    ttsReadPage: 'Read Page Aloud',
+    ttsStop: 'Stop Reading',
+    ttsReading: 'Reading...',
+    shortcutPanelToggle: 'Toggle accessibility menu',
+    keyboardShortcuts: 'Keyboard Shortcuts',
   },
   ar: {
     dir: 'rtl',
@@ -232,6 +248,14 @@ const translations = {
     screenReaderCompat: 'التوافق مع قارئ الشاشة',
     linkHighlighting: 'تمييز الروابط',
     animationControl: 'التحكم في الرسوم المتحركة',
+    noAltText: '(لا يوجد نص بديل)',
+    ttsHover: 'القراءة عند التمرير',
+    ttsSelection: 'قراءة النص المحدد',
+    ttsReadPage: 'قراءة الصفحة بصوت عالٍ',
+    ttsStop: 'إيقاف القراءة',
+    ttsReading: 'جارِ القراءة...',
+    shortcutPanelToggle: 'فتح/إغلاق قائمة إمكانية الوصول',
+    keyboardShortcuts: 'اختصارات لوحة المفاتيح',
   },
   ru: {
     dir: 'ltr',
@@ -249,7 +273,7 @@ const translations = {
     highContrast: 'Высокая контрастность',
     contrastDark: 'Тёмный',
     contrastLight: 'Светлый',
-    contrastInvert: 'Инвертировать',
+    contrastInvert: 'Инверсия',
     darkMode: 'Тёмный режим',
     monochrome: 'Оттенки серого',
     saturation: 'Насыщенность цвета',
@@ -310,10 +334,29 @@ const translations = {
     screenReaderCompat: 'Совместимость с программами чтения экрана',
     linkHighlighting: 'Выделение ссылок',
     animationControl: 'Управление анимациями',
+    noAltText: '(нет альт-текста)',
+    ttsHover: 'Озвучка при наведении',
+    ttsSelection: 'Озвучка выделенного текста',
+    ttsReadPage: 'Озвучить страницу',
+    ttsStop: 'Остановить озвучку',
+    ttsReading: 'Читаю...',
+    shortcutPanelToggle: 'Открыть/закрыть меню доступности',
+    keyboardShortcuts: 'Горячие клавиши',
   },
 };
 
 let currentLang = 'he';
+
+export function resolveLanguage(configLang) {
+  if (configLang && configLang !== 'auto' && translations[configLang]) {
+    return configLang;
+  }
+  const htmlLang = document.documentElement.lang?.split('-')[0].toLowerCase();
+  if (htmlLang && translations[htmlLang]) {
+    return htmlLang;
+  }
+  return 'en';
+}
 
 export function setLanguage(lang) {
   if (translations[lang]) currentLang = lang;

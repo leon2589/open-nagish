@@ -22,6 +22,7 @@ export class LinksModule {
   constructor(ctx) { this.ctx = ctx; this.active = false; }
 
   enable() {
+    if (this.active) return;
     this.active = true;
     injectStyleToPage(STYLE_ID, CSS);
   }

@@ -34,7 +34,10 @@ npm install open-nagish
 
 ```javascript
 import { init } from 'open-nagish';
-init({ lang: 'he', position: 'bottom-left' });
+const widget = init({ lang: 'he', position: 'bottom-left' });
+
+// To remove the widget and clean up all event listeners:
+widget.destroy();
 ```
 
 ## Features
@@ -67,6 +70,9 @@ init({ lang: 'he', position: 'bottom-left' });
 ### Media & Content
 | Feature | WCAG | Helps |
 |---------|------|-------|
+| Read on Hover (TTS) | Best practice | Blind, low vision |
+| Read Selection (TTS) | Best practice | Blind, low vision |
+| Read Page Aloud (TTS) | Best practice | Blind, low vision |
 | Link Highlighting | 1.4.1, 2.4.4 | Low vision, cognitive |
 | Image Alt Text Overlay | 1.1.1 | Blind, low vision |
 | Stop Animations | 2.3.1, 2.3.3 | Seizure, vestibular |
@@ -173,9 +179,9 @@ src/
   i18n.js                  Translations (HE/EN/AR/RU)
   storage.js               localStorage persistence
   utils.js                 Shared utilities
-  modules/                 One file per feature (23 modules)
+  modules/                 One file per feature (24 modules)
 dist/
-  open-nagish.min.js       Minified IIFE bundle (~77 KB)
+  open-nagish.min.js       Minified IIFE bundle (~89 KB)
   open-nagish.esm.js       ES module for bundlers
 demo.html                  Demo page
 ```

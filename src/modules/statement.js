@@ -1,12 +1,13 @@
 import { t, getLanguage } from '../i18n.js';
+import { escapeHtml } from '../utils.js';
 
 export class StatementModule {
-  constructor(ctx) { this.ctx = ctx; this.modal = null; this.backdrop = null; }
+  constructor(ctx) { this.ctx = ctx; this.modal = null; this.backdrop = null; this._escHandler = null; }
 
   show() {
     const config = this.ctx.config;
     if (config.statementUrl) {
-      window.open(config.statementUrl, '_blank');
+      window.open(config.statementUrl, '_blank', 'noopener,noreferrer');
       return;
     }
 
@@ -21,6 +22,7 @@ export class StatementModule {
     const dir = getLanguage() === 'he' || getLanguage() === 'ar' ? 'rtl' : 'ltr';
     this.modal.setAttribute('dir', dir);
     this.modal.setAttribute('role', 'dialog');
+    this.modal.setAttribute('aria-modal', 'true');
     this.modal.setAttribute('aria-label', t('statementTitle'));
     this.modal.style.cssText = `
       position: fixed; z-index: 2147483645;
@@ -41,21 +43,30 @@ export class StatementModule {
       t('animationControl'),
     ];
 
-    const accList = accommodations.map(a => `<li>${a}</li>`).join('');
+    const accList = accommodations.map(a => `<li>${escapeHtml(a)}</li>`).join('');
+
+    const coordHtml = data.coordinatorName
+      ? `<p><strong>${escapeHtml(t('statementCoordinator'))}:</strong> ${escapeHtml(data.coordinatorName)}</p>` : '';
+    const phoneHtml = data.orgPhone
+      ? `<p><strong>${escapeHtml(t('statementPhone'))}:</strong> <a href="tel:${escapeHtml(data.orgPhone)}">${escapeHtml(data.orgPhone)}</a></p>` : '';
+    const emailHtml = data.orgEmail
+      ? `<p><strong>${escapeHtml(t('statementEmail'))}:</strong> <a href="mailto:${escapeHtml(data.orgEmail)}">${escapeHtml(data.orgEmail)}</a></p>` : '';
+    const auditHtml = data.lastAuditDate
+      ? `<p><strong>${escapeHtml(t('statementLastAudit'))}:</strong> ${escapeHtml(data.lastAuditDate)}</p>` : '';
 
     this.modal.innerHTML = `
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-        <h2 style="font-size:22px;margin:0;">${t('statementTitle')}</h2>
-        <button id="anid-stmt-close" style="background:none;border:none;font-size:24px;cursor:pointer;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;" aria-label="${t('close')}">✕</button>
+        <h2 style="font-size:22px;margin:0;">${escapeHtml(t('statementTitle'))}</h2>
+        <button id="anid-stmt-close" style="background:none;border:none;font-size:24px;cursor:pointer;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;" aria-label="${escapeHtml(t('close'))}">&#x2715;</button>
       </div>
-      <p>${t('statementIntro')}</p>
-      ${data.coordinatorName ? `<p><strong>${t('statementCoordinator')}:</strong> ${data.coordinatorName}</p>` : ''}
-      ${data.orgPhone ? `<p><strong>${t('statementPhone')}:</strong> <a href="tel:${data.orgPhone}">${data.orgPhone}</a></p>` : ''}
-      ${data.orgEmail ? `<p><strong>${t('statementEmail')}:</strong> <a href="mailto:${data.orgEmail}">${data.orgEmail}</a></p>` : ''}
-      ${data.lastAuditDate ? `<p><strong>${t('statementLastAudit')}:</strong> ${data.lastAuditDate}</p>` : ''}
-      <p><strong>${t('statementAccommodations')}:</strong></p>
+      <p>${escapeHtml(t('statementIntro'))}</p>
+      ${coordHtml}
+      ${phoneHtml}
+      ${emailHtml}
+      ${auditHtml}
+      <p><strong>${escapeHtml(t('statementAccommodations'))}:</strong></p>
       <ul style="padding-inline-start:20px;margin-bottom:16px;">${accList}</ul>
-      <p style="font-size:12px;color:#888;">${t('poweredBy')} OpenNagish | SI 5568 + WCAG 2.1 AA</p>
+      <p style="font-size:12px;color:#888;">${escapeHtml(t('poweredBy'))} <a href="https://github.com/leon2589/open-nagish" target="_blank" rel="noopener noreferrer" style="color:#888;text-decoration:underline;">OpenNagish</a> | SI 5568 + WCAG 2.1 AA</p>
     `;
 
     document.body.appendChild(this.backdrop);
@@ -63,15 +74,17 @@ export class StatementModule {
     this.modal.querySelector('#anid-stmt-close').addEventListener('click', () => this.close());
     this.modal.querySelector('#anid-stmt-close').focus();
 
-    document.addEventListener('keydown', this._escHandler = (e) => {
-      if (e.key === 'Escape') this.close();
-    });
+    this._escHandler = (e) => { if (e.key === 'Escape') this.close(); };
+    document.addEventListener('keydown', this._escHandler);
   }
 
   close() {
     if (this.modal) { this.modal.remove(); this.modal = null; }
     if (this.backdrop) { this.backdrop.remove(); this.backdrop = null; }
-    if (this._escHandler) document.removeEventListener('keydown', this._escHandler);
+    if (this._escHandler) {
+      document.removeEventListener('keydown', this._escHandler);
+      this._escHandler = null;
+    }
   }
 
   enable() {}

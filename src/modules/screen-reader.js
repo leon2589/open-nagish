@@ -1,17 +1,19 @@
+import { t } from '../i18n.js';
+import { escapeHtml } from '../utils.js';
+
 export class ScreenReaderModule {
-  constructor(ctx) { this.ctx = ctx; this.overlay = null; }
+  constructor(ctx) { this.ctx = ctx; this.overlay = null; this._escHandler = null; }
 
   toggle() {
-    if (this.overlay) {
-      this.close();
-    } else {
-      this.show();
-    }
+    this.overlay ? this.close() : this.show();
   }
 
   show() {
     const content = this.extractContent();
     this.overlay = document.createElement('div');
+    this.overlay.setAttribute('role', 'dialog');
+    this.overlay.setAttribute('aria-modal', 'true');
+    this.overlay.setAttribute('aria-label', t('screenReaderPreview'));
     this.overlay.style.cssText = `
       position: fixed;
       z-index: 2147483645;
@@ -28,10 +30,11 @@ export class ScreenReaderModule {
     this.overlay.textContent = content;
 
     const closeBtn = document.createElement('button');
-    closeBtn.textContent = '✕ Close';
+    closeBtn.textContent = `\u2715 ${t('close')}`;
+    closeBtn.setAttribute('aria-label', t('close'));
     closeBtn.style.cssText = `
       position: fixed;
-      top: 12px; right: 12px;
+      top: 12px; inset-inline-end: 12px;
       z-index: 2147483646;
       background: #c62828;
       color: #fff;
@@ -48,12 +51,19 @@ export class ScreenReaderModule {
     this.overlay.appendChild(closeBtn);
     document.body.appendChild(this.overlay);
     closeBtn.focus();
+
+    this._escHandler = (e) => { if (e.key === 'Escape') this.close(); };
+    document.addEventListener('keydown', this._escHandler);
   }
 
   close() {
     if (this.overlay) {
       this.overlay.remove();
       this.overlay = null;
+    }
+    if (this._escHandler) {
+      document.removeEventListener('keydown', this._escHandler);
+      this._escHandler = null;
     }
   }
 
@@ -65,7 +75,7 @@ export class ScreenReaderModule {
     const lang = document.documentElement.lang;
     if (lang) lines.push(`[Language] ${lang}\n`);
 
-    const walk = (node, depth = 0) => {
+    const walk = (node) => {
       if (node.nodeType === Node.TEXT_NODE) {
         const text = node.textContent.trim();
         if (text) lines.push(text);
@@ -73,34 +83,34 @@ export class ScreenReaderModule {
       }
       if (node.nodeType !== Node.ELEMENT_NODE) return;
 
-      const el = node;
-      const tag = el.tagName.toLowerCase();
-      const role = el.getAttribute('role');
+      const tag = node.tagName.toLowerCase();
+      const role = node.getAttribute('role');
 
       if (['script', 'style', 'noscript', 'template'].includes(tag)) return;
-      if (el.hidden || el.getAttribute('aria-hidden') === 'true') return;
-      if (el.id === 'opennagish-widget') return;
+      if (node.hidden || node.getAttribute('aria-hidden') === 'true') return;
+      if (node.id === 'opennagish-widget') return;
 
       if (/^h[1-6]$/.test(tag)) {
-        lines.push(`\n[${'#'.repeat(parseInt(tag[1]))} Heading ${tag[1]}] ${el.textContent.trim()}`);
+        lines.push(`\n[${'#'.repeat(parseInt(tag[1]))} Heading ${tag[1]}] ${node.textContent.trim()}`);
         return;
       }
       if (tag === 'img') {
-        const alt = el.alt || '(no alt text)';
+        const alt = node.alt || t('noAltText');
         lines.push(`[Image: ${alt}]`);
         return;
       }
-      if (tag === 'a' && el.href) {
-        lines.push(`[Link: ${el.textContent.trim()} -> ${el.href}]`);
+      if (tag === 'a' && node.href) {
+        lines.push(`[Link: ${node.textContent.trim()} -> ${node.href}]`);
         return;
       }
       if (['nav', 'header', 'footer', 'main', 'aside'].includes(tag) || role) {
-        lines.push(`\n--- [${role || tag}${el.getAttribute('aria-label') ? ': ' + el.getAttribute('aria-label') : ''}] ---`);
+        const ariaLabel = node.getAttribute('aria-label');
+        lines.push(`\n--- [${role || tag}${ariaLabel ? ': ' + ariaLabel : ''}] ---`);
       }
-      if (tag === 'li') lines.push('  • ');
+      if (tag === 'li') lines.push('  \u2022 ');
 
-      for (const child of el.childNodes) {
-        walk(child, depth + 1);
+      for (const child of node.childNodes) {
+        walk(child);
       }
     };
 
