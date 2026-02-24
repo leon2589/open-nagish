@@ -1,3 +1,10 @@
+const HTML_ESCAPE_MAP = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+
+export function escapeHtml(str) {
+  if (typeof str !== 'string') return '';
+  return str.replace(/[&<>"']/g, ch => HTML_ESCAPE_MAP[ch]);
+}
+
 export function createElement(tag, attrs = {}, children = []) {
   const el = document.createElement(tag);
   for (const [key, val] of Object.entries(attrs)) {

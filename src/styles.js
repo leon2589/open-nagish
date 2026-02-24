@@ -1,3 +1,5 @@
+// "anid-" prefix = Accessibility Nagish Interface Design.
+// Namespaces all widget CSS classes to prevent collisions with host-page styles.
 export function getWidgetStyles() {
   return `
     :host {
@@ -131,6 +133,8 @@ export function getWidgetStyles() {
       overflow-y: auto;
       flex: 1;
       padding: 8px 0;
+      scrollbar-width: thin;
+      scrollbar-color: #ccc transparent;
     }
     .anid-panel-body::-webkit-scrollbar {
       width: 6px;
@@ -261,6 +265,7 @@ export function getWidgetStyles() {
 
     .anid-btn-group {
       display: flex;
+      flex-wrap: wrap;
       gap: 6px;
     }
     .anid-btn {
@@ -273,6 +278,9 @@ export function getWidgetStyles() {
       font-size: 13px;
       min-width: 44px;
       min-height: 32px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       transition: background 0.15s, border-color 0.15s;
     }
     .anid-btn:hover {
@@ -307,6 +315,14 @@ export function getWidgetStyles() {
       -webkit-appearance: none;
       width: 18px;
       height: 18px;
+      border-radius: 50%;
+      background: #1565c0;
+      cursor: pointer;
+    }
+    .anid-slider::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border: none;
       border-radius: 50%;
       background: #1565c0;
       cursor: pointer;
@@ -442,6 +458,20 @@ export function getWidgetStyles() {
       background: rgba(0,0,0,0.5);
     }
 
+    .anid-shortcut {
+      display: inline-block;
+      font-size: 10px;
+      font-family: inherit;
+      padding: 1px 5px;
+      margin-inline-start: 6px;
+      background: #eee;
+      color: #666;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      vertical-align: middle;
+      line-height: 1.4;
+    }
+
     .anid-live-region {
       position: absolute;
       width: 1px;
@@ -453,11 +483,11 @@ export function getWidgetStyles() {
 
     @media (max-width: 480px) {
       .anid-panel {
-        width: 100vw;
-        max-width: 100vw;
-        height: 100vh;
-        max-height: 100vh;
-        border-radius: 0;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        border-radius: 0 !important;
         top: 0 !important;
         left: 0 !important;
         right: 0 !important;

@@ -1,7 +1,10 @@
+const ORIG_SRC_ATTR = 'data-anid-orig-src';
+
 export class MuteSoundsModule {
   constructor(ctx) { this.ctx = ctx; this.active = false; this.mutedElements = []; }
 
   enable() {
+    if (this.active) return;
     this.active = true;
     document.querySelectorAll('audio, video').forEach(el => {
       if (!el.muted) {
@@ -14,14 +17,15 @@ export class MuteSoundsModule {
     document.querySelectorAll('iframe').forEach(iframe => {
       try {
         const src = iframe.src || '';
+        if (!src || iframe.getAttribute(ORIG_SRC_ATTR)) return;
         if (src.includes('youtube') || src.includes('vimeo') || src.includes('dailymotion')) {
           if (!src.includes('mute=1') && !src.includes('muted=1')) {
-            iframe.dataset.anidOrigSrc = src;
+            iframe.setAttribute(ORIG_SRC_ATTR, src);
             const separator = src.includes('?') ? '&' : '?';
             iframe.src = src + separator + 'mute=1';
           }
         }
-      } catch { /* cross-origin */ }
+      } catch (_) { /* cross-origin */ }
     });
   }
 
@@ -32,9 +36,9 @@ export class MuteSoundsModule {
     });
     this.mutedElements = [];
 
-    document.querySelectorAll('iframe[data-anid-orig-src]').forEach(iframe => {
-      iframe.src = iframe.dataset.anidOrigSrc;
-      delete iframe.dataset.anidOrigSrc;
+    document.querySelectorAll(`iframe[${ORIG_SRC_ATTR}]`).forEach(iframe => {
+      iframe.src = iframe.getAttribute(ORIG_SRC_ATTR);
+      iframe.removeAttribute(ORIG_SRC_ATTR);
     });
   }
 

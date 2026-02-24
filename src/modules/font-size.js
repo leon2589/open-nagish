@@ -30,7 +30,7 @@ export class FontSizeModule {
     const pxChange = this.level * STEP_PX;
     const css = `
       html { font-size: calc(1em + ${pxChange}px) !important; }
-      body, body * {
+      body, body *:not(#opennagish-widget) {
         font-size: inherit !important;
       }
     `;

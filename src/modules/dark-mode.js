@@ -7,7 +7,7 @@ const CSS = `
     background-color: #1a1a2e !important;
     color: #e0e0e0 !important;
   }
-  html body * {
+  html body *:not(#opennagish-widget) {
     background-color: transparent !important;
     color: #e0e0e0 !important;
     border-color: #444 !important;
@@ -29,6 +29,7 @@ export class DarkModeModule {
   constructor(ctx) { this.ctx = ctx; this.active = false; }
 
   enable() {
+    if (this.active) return;
     this.active = true;
     injectStyleToPage(STYLE_ID, CSS);
   }

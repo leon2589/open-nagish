@@ -14,6 +14,7 @@ export class KeyboardNavModule {
   constructor(ctx) { this.ctx = ctx; this.active = false; this._onTab = null; }
 
   enable() {
+    if (this.active) return;
     this.active = true;
     document.body.dataset.anidKeyboardNav = 'true';
     injectStyleToPage(STYLE_ID, CSS);
@@ -30,7 +31,10 @@ export class KeyboardNavModule {
     delete document.body.dataset.anidKeyboardNav;
     document.body.classList.remove('anid-using-keyboard');
     removePageStyle(STYLE_ID);
-    if (this._onTab) document.removeEventListener('keydown', this._onTab);
+    if (this._onTab) {
+      document.removeEventListener('keydown', this._onTab);
+      this._onTab = null;
+    }
   }
 
   toggle() { this.active ? this.disable() : this.enable(); }

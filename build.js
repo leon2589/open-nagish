@@ -2,6 +2,7 @@ const esbuild = require('esbuild');
 const fs = require('fs');
 const path = require('path');
 
+const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8'));
 const isDev = process.argv.includes('--dev');
 
 const commonOptions = {
@@ -24,7 +25,7 @@ async function build() {
     globalName: 'OpenNagish',
     minify: !isDev,
     banner: {
-      js: `/*! OpenNagish v1.0.1 | MIT License | by Leonid Shoresh | https://github.com/leon2589/open-nagish */`,
+      js: `/*! OpenNagish v${pkg.version} | MIT License | by Leonid Shoresh | https://github.com/leon2589/open-nagish */`,
     },
   });
 

@@ -17,7 +17,7 @@ const CSS = `
     font-style: normal;
     font-display: swap;
   }
-  html body, html body * {
+  html body, html body *:not(#opennagish-widget) {
     font-family: 'OpenDyslexic', sans-serif !important;
   }
 `;
@@ -26,6 +26,7 @@ export class DyslexiaFontModule {
   constructor(ctx) { this.ctx = ctx; this.active = false; }
 
   enable() {
+    if (this.active) return;
     this.active = true;
     injectStyleToPage(STYLE_ID, CSS);
   }

@@ -1,10 +1,9 @@
 {
   "name": "open-nagish",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Comprehensive open-source web accessibility overlay widget for Israeli SI 5568 and WCAG 2.1 AA compliance",
   "main": "dist/open-nagish.min.js",
   "module": "dist/open-nagish.esm.js",
-  "types": "dist/open-nagish.d.ts",
   "files": [
     "dist/",
     "LICENSE",

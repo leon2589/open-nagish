@@ -1,14 +1,17 @@
+import { t } from '../i18n.js';
+
 const ATTR = 'data-anid-alt-shown';
 
 export class ImagesModule {
   constructor(ctx) { this.ctx = ctx; this.active = false; this.overlays = []; }
 
   enable() {
+    if (this.active) return;
     this.active = true;
     document.querySelectorAll('img').forEach(img => {
       if (img.getAttribute(ATTR)) return;
       const alt = img.alt || img.getAttribute('aria-label') || '';
-      const label = alt || '⚠ No alt text';
+      const label = alt || `\u26A0 ${t('noAltText')}`;
       const overlay = document.createElement('span');
       overlay.className = 'anid-alt-overlay';
       overlay.style.cssText = `
