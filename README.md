@@ -17,7 +17,7 @@ Add one line to your HTML — the widget auto-initializes, no extra JavaScript n
 Or pin a specific version:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/open-nagish@1.1.2/dist/open-nagish.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/open-nagish@1.1.3/dist/open-nagish.min.js" defer></script>
 ```
 
 Or self-host:
