@@ -594,10 +594,18 @@ class OpenNagishWidget {
     }
   }
 
+  _getBottomOffset() {
+    const isMobile = window.innerWidth <= 480;
+    const raw = isMobile ? this.config.mobileBottomOffset : this.config.bottomOffset;
+    const offset = parseInt(raw, 10);
+    return offset > 0 ? offset : 0;
+  }
+
   positionElement(el, pos) {
+    const extra = this._getBottomOffset();
     const positions = {
-      'bottom-left': { bottom: '20px', left: '20px' },
-      'bottom-right': { bottom: '20px', right: '20px' },
+      'bottom-left': { bottom: `${20 + extra}px`, left: '20px' },
+      'bottom-right': { bottom: `${20 + extra}px`, right: '20px' },
       'top-left': { top: '20px', left: '20px' },
       'top-right': { top: '20px', right: '20px' },
     };
@@ -605,9 +613,10 @@ class OpenNagishWidget {
   }
 
   positionPanel(pos) {
+    const extra = this._getBottomOffset();
     const panelPos = {
-      'bottom-left': { bottom: '88px', left: '20px' },
-      'bottom-right': { bottom: '88px', right: '20px' },
+      'bottom-left': { bottom: `${88 + extra}px`, left: '20px' },
+      'bottom-right': { bottom: `${88 + extra}px`, right: '20px' },
       'top-left': { top: '88px', left: '20px' },
       'top-right': { top: '88px', right: '20px' },
     };
