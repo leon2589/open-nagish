@@ -110,8 +110,8 @@ widget.destroy();
 |--------|------|---------|-------------|
 | `position` | string | `'bottom-left'` | Widget button placement: `'bottom-left'`, `'bottom-right'`, `'top-left'`, `'top-right'` |
 | `lang` | string | auto-detect | UI language: `'he'`, `'en'`, `'ar'`, `'ru'` |
-| `bottomOffset` | number | `0` | Extra pixels to raise the button above the default position on desktop (screens > 480px). Only affects bottom positions. |
-| `mobileBottomOffset` | number | `0` | Extra pixels to raise the button on mobile (screens ≤ 480px). Useful when the site has a fixed bottom navbar. Only affects bottom positions. |
+| `bottomOffset` | number | `0` | Extra pixels to raise the button above the default position on desktop (screens > 768px). Only affects bottom positions. |
+| `mobileBottomOffset` | number | `0` | Extra pixels to raise the button on mobile (screens ≤ 768px). Useful when the site has a fixed bottom navbar. Only affects bottom positions. |
 | `statementUrl` | string | — | URL to an existing accessibility statement page |
 | `statementData` | object | — | Data for the built-in accessibility statement generator |
 
