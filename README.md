@@ -91,6 +91,8 @@ widget.destroy();
   window.OpenNagishConfig = {
     position: 'bottom-left',    // 'bottom-left', 'bottom-right', 'top-left', 'top-right'
     lang: 'he',                 // 'he', 'en', 'ar', 'ru'
+    bottomOffset: 0,            // extra pixels to push the button up on desktop
+    mobileBottomOffset: 60,     // extra pixels to push the button up on mobile (≤ 480px)
     statementUrl: '/accessibility-statement',  // link to existing statement
     statementData: {
       orgName: 'My Company',
@@ -103,6 +105,15 @@ widget.destroy();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/open-nagish@latest/dist/open-nagish.min.js" defer></script>
 ```
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `position` | string | `'bottom-left'` | Widget button placement: `'bottom-left'`, `'bottom-right'`, `'top-left'`, `'top-right'` |
+| `lang` | string | auto-detect | UI language: `'he'`, `'en'`, `'ar'`, `'ru'` |
+| `bottomOffset` | number | `0` | Extra pixels to raise the button above the default position on desktop (screens > 480px). Only affects bottom positions. |
+| `mobileBottomOffset` | number | `0` | Extra pixels to raise the button on mobile (screens ≤ 480px). Useful when the site has a fixed bottom navbar. Only affects bottom positions. |
+| `statementUrl` | string | — | URL to an existing accessibility statement page |
+| `statementData` | object | — | Data for the built-in accessibility statement generator |
 
 ## Languages
 
