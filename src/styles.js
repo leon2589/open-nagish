@@ -481,7 +481,7 @@ export function getWidgetStyles() {
       white-space: nowrap;
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 768px) {
       .anid-panel {
         width: 100vw !important;
         max-width: 100vw !important;

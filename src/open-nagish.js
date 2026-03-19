@@ -595,7 +595,7 @@ class OpenNagishWidget {
   }
 
   _getBottomOffset() {
-    const isMobile = window.innerWidth <= 480;
+    const isMobile = window.innerWidth <= 768;
     const raw = isMobile ? this.config.mobileBottomOffset : this.config.bottomOffset;
     const offset = parseInt(raw, 10);
     return offset > 0 ? offset : 0;
@@ -624,7 +624,7 @@ class OpenNagishWidget {
   }
 
   updatePanelPosition() {
-    if (window.innerWidth <= 480) return;
+    if (window.innerWidth <= 768) return;
 
     const triggerRect = this.trigger.getBoundingClientRect();
     const vh = window.innerHeight;
