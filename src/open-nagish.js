@@ -161,7 +161,7 @@ class OpenNagishWidget {
           { id: 'colorBlindSim', type: 'colorblind' },
         ])}
         ${this.buildCategory('navigation', t('categoryNavigation'), '🧭', [
-          { id: 'keyboardNav', type: 'toggle', shortcut: 'Alt+K' },
+          { id: 'keyboardNav', type: 'action', shortcut: 'Alt+K' },
           { id: 'focusIndicators', type: 'toggle' },
           { id: 'headingStructure', type: 'headings' },
           { id: 'pageStructure', type: 'landmarks' },
@@ -386,6 +386,7 @@ class OpenNagishWidget {
       case 'toggleHeadings': this.toggleList('headings'); break;
       case 'toggleLandmarks': this.toggleList('landmarks'); break;
       case 'screenReaderPreview': this.modules.screenReader?.toggle(); break;
+      case 'keyboardNav': this.modules.keyboardNav?.show(); break;
       case 'ttsReadPage': this.modules.tts?.readPage(); break;
       case 'accessibilityStatement': this.modules.statement?.show(); break;
       case 'complianceBadge': this.modules.badge?.show(); break;
